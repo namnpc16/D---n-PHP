@@ -63,6 +63,7 @@
             <li class="<?php if($_GET['page_layout'] == 'category' || $_GET['page_layout'] == 'add_category' || $_GET['page_layout'] == "edit_category"){echo $active;}  ?>"><a href="index.php?page_layout=category"><svg class="glyph stroked open folder"><use xlink:href="#stroked-open-folder"/></svg>Quản lý danh mục</a></li>
             <li class="<?php if($_GET['page_layout'] == 'product' || $_GET['page_layout'] == 'add_product' || $_GET['page_layout'] == "edit_product"){echo $active;}  ?>"><a href="index.php?page_layout=product"><svg class="glyph stroked bag"><use xlink:href="#stroked-bag"></use></svg>Quản lý sản phẩm</a></li>
             <li class="<?php if($_GET['page_layout'] == 'comment' || $_GET['page_layout'] == 'add_comm' || $_GET["page_layout"] == 'edit_comm'){echo $active;}  ?>"><a href="index.php?page_layout=comment"><svg class="glyph stroked two messages"><use xlink:href="#stroked-two-messages"/></svg> Quản lý bình luận</a></li>
+            <li class="<?php if($_GET['page_layout'] == 'vulgar' || $_GET['page_layout'] == 'add_vulgar'){echo $active;}  ?>"><a href="index.php?page_layout=vulgar"><svg class="glyph stroked two messages"><use xlink:href="#stroked-two-messages"/></svg> Quản lý từ ngữ</a></li>
             <li><a href="ads.html"><svg class="glyph stroked chain"><use xlink:href="#stroked-chain"/></svg> Quản lý quảng cáo</a></li>
             <li><a href="setting.html"><svg class="glyph stroked gear"><use xlink:href="#stroked-gear"/></svg> Cấu hình</a></li>
         </ul>
@@ -114,7 +115,12 @@
                 case 'dashboard':
                     include_once("dashboard.php");
                     break;
-
+                case 'vulgar':
+                    include_once("./vulgarword.php");
+                    break;
+                case 'add_vulgar':
+                    include_once("./add_vulgar.php");
+                    break;
             }
         }else{
             include_once("dashboard.php");

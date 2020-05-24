@@ -74,7 +74,12 @@
                                 $list_page .= '<ul class="pagination">';
                                 $list_page .= '<li class="page-item '.$disabled_prev.'"><a class="page-link" aria-disabled="'.$boolean_prev.'" href="index.php?page_layout=user&page='.$page_prev.'">&laquo;</a></li>';
                                 for ($i=1; $i <= $total_page ; $i++) { 
-                                    $list_page .= '<li class="page-item"><a class="page-link" href="index.php?page_layout=user&page='.$i.'">'.$i.'</a></li>';
+                                    if ($page == $i) {
+                                        $active = "active";
+                                    }else{
+                                        $active = "";
+                                    }
+                                    $list_page .= '<li class="page-item '.$active.'"><a class="page-link" href="index.php?page_layout=user&page='.$i.'">'.$i.'</a></li>';
                                 }
                                 $list_page .= '<li class="page-item '.$disabled_next.'"><a class="page-link" aria-disabled="'.$boolean_next.'" href="index.php?page_layout=user&page='.$page_next.'">&raquo;</a></li>';
                                 $list_page .= '</ul>';
@@ -89,6 +94,31 @@
                                 while ($row = mysqli_fetch_array($query)) {
                             ?>
 
+                            <!-- //////////////   Modal - delete   //////////////// -->
+                            <div class="modal myModal" tabindex="-1" role="dialog" id="myModal">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title">Thông báo !</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <form action="del_user.php" method="POST">
+                                            <div class="modal-body">
+                                                <input type="hidden" name="delete_id" id="delete_id">
+                                                <p>Bạn có muốn xóa người dùng ?</p>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                <button type="submit" name="delete_product" class="btn btn-primary">Delete</button>
+                                            </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                               
+                                <!-- /////////////////////////////////// -->
                             <tr>
                                 <td><?php echo $row['user_id']; ?></td>
                                 <td><?php echo $row['user_full']; ?></td>
@@ -101,7 +131,7 @@
                                  ?></span></td>
                                 <td class="form-group">
                                     <a href="index.php?page_layout=edit_user&user_id=<?php echo $row['user_id']; ?>" class="btn btn-primary"><i class="glyphicon glyphicon-pencil"></i></a>
-                                    <a onclick="return thongbao()" href="del_user.php?user_id=<?php echo $row['user_id']; ?>" class="btn btn-danger"><i class="glyphicon glyphicon-remove"></i></a>
+                                    <a name="deleteUser" class="btn btn-danger deleteUser"><i class="glyphicon glyphicon-remove"></i></a>
                                 </td>
                             </tr>
                             <?php
@@ -132,3 +162,15 @@
 <script src="js/jquery-1.11.1.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <script src="js/bootstrap-table.js"></script>
+<script>
+    $(document).ready(function () {
+        $(".deleteUser").on("click", function () {
+            $("#myModal").modal('show');
+            $tr = $(this).closest('tr');
+            let data = $tr.children("td").map(function () {
+                return $(this).text();
+            }).get();
+            $("#delete_id").val(data[0]);
+        });
+    });
+</script>

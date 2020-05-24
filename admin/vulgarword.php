@@ -7,20 +7,20 @@
     <div class="row">
         <ol class="breadcrumb">
             <li><a href="#"><svg class="glyph stroked home"><use xlink:href="#stroked-home"></use></svg></a></li>
-            <li class="active">Quản lý danh mục</li>
+            <li class="active">Quản lý từ ngữ</li>
         </ol>
     </div>
     <!--/.row-->
 
     <div class="row">
         <div class="col-lg-12">
-            <h1 class="page-header">Quản lý danh mục</h1>
+            <h1 class="page-header">Quản lý từ ngữ</h1>
         </div>
     </div>
     <!--/.row-->
     <div id="toolbar" class="btn-group">
-        <a href="index.php?page_layout=add_category" class="btn btn-success">
-            <i class="glyphicon glyphicon-plus"></i> Thêm danh mục
+        <a href="index.php?page_layout=add_vulgar" class="btn btn-success">
+            <i class="glyphicon glyphicon-plus"></i> Thêm từ ngữ cần loại bỏ
         </a>
     </div>
     <?php
@@ -37,7 +37,7 @@
                         <thead>
                             <tr>
                                 <th data-field="id" data-sortable="true">ID</th>
-                                <th>Tên danh mục</th>
+                                <th>Từ ngữ</th>
                                 <th>Hành động</th>
                             </tr>
                         </thead>
@@ -49,9 +49,9 @@
                             }else {
                                 $page = 1;
                             }
-                            $rows_per_page = 3;
+                            $rows_per_page = 5;
                             $per_page = $page * $rows_per_page - $rows_per_page;
-                            $total_rows = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM category"));
+                            $total_rows = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM vulgarwords"));
                             $total_page = ceil($total_rows/$rows_per_page);
                             $page_prev = $page - 1;
                             if ($page_prev <= 0) {
@@ -75,7 +75,13 @@
                             $list_page .= '<ul class="pagination">';
                             $list_page .= '<li class="page-item '.$disabled_prev.'"><a class="page-link" aria-disabled="'.$boolean_prev.'" href="index.php?page_layout=category&page='.$page_prev.'">&laquo;</a></li>';
                             for ($i=1; $i <= $total_page ; $i++) { 
-                                $list_page .= '<li class="page-item"><a class="page-link" href="index.php?page_layout=category&page='.$i.'">'.$i.'</a></li>';
+                                if ($page == $i) {
+                                    $active = "active";
+                                } else {
+                                    $active = "";
+                                }
+                                
+                                $list_page .= '<li class="page-item '.$active.'"><a class="page-link" href="index.php?page_layout=category&page='.$i.'">'.$i.'</a></li>';
                             }
                             $list_page .= '<li class="page-item '.$disabled_next.'"><a class="page-link" aria-disabled="'.$boolean_next.'" href="index.php?page_layout=category&page='.$page_next.'">&raquo;</a></li>';
                             $list_page .= '</ul>';
@@ -83,7 +89,7 @@
 
 
                             // hiển thị data
-                            $sql = "SELECT * FROM `category` ORDER BY cat_id ASC LIMIT $per_page, $rows_per_page";
+                            $sql = "SELECT * FROM `vulgarwords` ORDER BY id DESC LIMIT $per_page, $rows_per_page";
                             $query = mysqli_query($conn, $sql);
                             
                             // echo "<pre>";
@@ -101,10 +107,10 @@
                                             <span aria-hidden="true">&times;</span>
                                             </button>
                                         </div>
-                                        <form action="del_category.php" method="POST">
+                                        <form action="del_vulgar.php" method="POST">
                                             <div class="modal-body">
                                                 <input type="hidden" name="delete_id" id="delete_id">
-                                                <p>Bạn có muốn xóa danh muc ?</p>
+                                                <p>Bạn có muốn xóa từ ngữ ?</p>
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -117,11 +123,10 @@
                                
                                 <!-- /////////////////////////////////// -->
                             <tr>
-                                <td><?php echo $row['cat_id']; ?></td>
-                                <td><?php echo $row['cat_name']; ?></td>
+                                <td><?php echo $row['id']; ?></td>
+                                <td><?php echo $row['vulgar_words']; ?></td>
                                 <td class="form-group">
-                                    <a href="index.php?page_layout=edit_category&cat_id=<?php echo $row["cat_id"]; ?>" class="btn btn-primary"><i class="glyphicon glyphicon-pencil"></i></a>
-                                    <a class="btn btn-danger deleteCate"><i class="glyphicon glyphicon-remove"></i></a>
+                                    <a class="btn btn-danger deleteVulgar"><i class="glyphicon glyphicon-remove"></i></a>
                                 </td>
                             </tr>
                         <?php
@@ -154,7 +159,7 @@
 <script src="js/bootstrap-table.js"></script>
 <script>
     $(document).ready(function () {
-        $(".deleteCate").on("click", function () {
+        $(".deleteVulgar").on("click", function () {
             $("#myModal").modal('show');
             $tr = $(this).closest('tr');
             let data = $tr.children("td").map(function () {

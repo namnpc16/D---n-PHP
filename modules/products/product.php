@@ -36,13 +36,47 @@
 
      <!--	Comment	-->
      <?php
+
+     // phần xử lý biến đổi từ ngữ thô tục trong comment
+        $sql_vulgar = "SELECT vulgar_words FROM `vulgarwords`";
+        $query_vulgar = mysqli_query($conn, $sql_vulgar);
+        $str_vulgar = "";
+        while ($row_vulgar = mysqli_fetch_array($query_vulgar)) {
+            $str_vulgar .= $row_vulgar["vulgar_words"] . " ";
+        }
+        $str_vulgar_arr = explode(" ", $str_vulgar);
+        array_pop($str_vulgar_arr);
+
+
         if(isset($_POST['sbm'])){
             $comm_name = $_POST['comm_name'];
             $comm_mail = $_POST['comm_mail'];
             $comm_details = $_POST['comm_details'];
+
+            $comm_details_arr = explode(" ", $comm_details);
+            $replace = "";
+            foreach ($str_vulgar_arr as $key => $value) {
+                foreach ($comm_details_arr as $key1 => $value1) {
+                    if ($value1 == $value) {
+                        
+                        $length = strlen($value1);
+                        for ($i=0; $i < $length; $i++) { 
+                            $replace .= "*";
+                        }
+                        $comm_details_arr[$key1] = $replace;
+                        $replace = "";
+                        // echo $replace."<br>";
+                        
+                    }
+                }
+            }
+            $convert = implode(" ", $comm_details_arr);
+            // echo $convert;
+
+
             date_default_timezone_get('Asia/Bangkok');
             $comm_date = date('Y-m-d H:i:s');
-            $sql = "INSERT INTO `comment`(`prd_id`, `comm_name`, `comm_mail`, `comm_date`, `comm_details`, comm_status) VALUES ($prd_id, '$comm_name', '$comm_mail', '$comm_date','$comm_details', 0)";
+            $sql = "INSERT INTO `comment`(`prd_id`, `comm_name`, `comm_mail`, `comm_date`, `comm_details`, comm_vulgar, comm_status) VALUES ($prd_id, '$comm_name', '$comm_mail', '$comm_date','$comm_details', '$convert', 0)";
             mysqli_query($conn, $sql);
             $success = '<div class="alert alert-success">Thêm mới thành công bình luận của bạn sẽ được admin kiểm duyệt!</div>';
         }
@@ -79,16 +113,51 @@
      <div id="comments-list" class="row">
          <div class="col-lg-12 col-md-12 col-sm-12">
              <?php
+               
                 $sql_comm = "SELECT * FROM `comment` WHERE prd_id = $prd_id AND comm_status = 1 ORDER BY comm_id ASC ";
                 $query_comm = mysqli_query($conn, $sql_comm);
+
+                //// phần xử lý biến đổi từ ngữ thô tục thành dấu *** /// Đang bị sai
+                // function vulgar($str){
+                //     $str_arr = explode(" ", $str);
+                //     include_once("./admin/connect.php");
+                //     $sql_vulgar = "SELECT vulgar_words FROM `vulgarwords`";
+                //     $query_vulgar = mysqli_query($conn, $sql_vulgar);
+                //     $str_vulgar = "";
+                //     while ($row_vulgar = mysqli_fetch_array($query_vulgar)) {
+                //         $str_vulgar .= $row_vulgar["vulgar_words"] . " ";
+                //     }
+                //     $str_vulgar_arr = explode(" ", $str_vulgar);
+                //     array_pop($str_vulgar_arr);
+                //     $replace = "";
+                //     foreach ($str_vulgar_arr as $key_t_t_t => $value_t_t_t) {
+                //         foreach ($str_arr as $key => $value) {
+                //             if ($value_t_t_t == $value) {
+                //                 $length = strlen($str_arr[$key]);
+                //                 for ($i=0; $i < $length; $i++) { 
+                //                     $replace .= "*";
+                //                 }
+                //                 $str_arr[$key] = $replace;
+                                
+                //                 $replace = "";
+                //             }
+                //         }
+                //     }
+                //     $convert = implode(" ", $str_arr);
+                //     return $convert;
+                // }
+                //////////////////////////////////////////////////
+                
                 while ($row_comm = mysqli_fetch_array($query_comm)){
              ?>
              <div class="comment-item">
                  <ul>
                      <li><b><?php echo $row_comm['comm_name']; ?></b></li>
                      <li><?php echo $row_comm['comm_date']; ?></li>
+                     <!-- cần loại bỏ từ ngữ thô tục -->
                      <li>
-                         <p><?php echo $row_comm['comm_details']; ?></p>
+                         <p><?php echo $row_comm["comm_vulgar"]; ?></p>   
+                        
                      </li>
                  </ul>
              </div>
@@ -98,6 +167,7 @@
          </div>
      </div>
      
+
      <!--	End Comments List	-->
  </div>
  <!--	End Product	-->

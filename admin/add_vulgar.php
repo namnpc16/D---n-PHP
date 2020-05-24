@@ -5,13 +5,15 @@
     
     // thêm category
     if (isset($_POST['sbm'])) {
-        $cat_name = $_POST['cat_name'];
-        $sql = "SELECT * FROM category WHERE cat_name='$cat_name'";
+        date_default_timezone_set("Asia/Bangkok");
+        $date = date("Y-m-d H:i:s");
+        $vulgar_name = $_POST['vulgar_name'];
+        $sql = "SELECT * FROM vulgarwords WHERE vulgar_words='$vulgar_name'";
         $query = mysqli_query($conn, $sql);
         if (mysqli_num_rows($query) > 0) {
-            $error = '<div class="alert alert-danger">Từ ngữ đã tồn tại !</div>';
+            $error = '<div class="alert alert-danger">Danh mục đã tồn tại !</div>';
         }else {
-            $sql = "INSERT INTO category(cat_name) VALUES ('$cat_name')";
+            $sql = "INSERT INTO vulgarwords(vulgar_words, vulgar_date) VALUES ('$vulgar_name', '$date')";
             mysqli_query($conn, $sql);
             $success = '<div class="alert alert-success">Thêm mới thành công !</div>';
             // header("location: index.php?page_layout=category");
@@ -22,15 +24,15 @@
     <div class="row">
         <ol class="breadcrumb">
             <li><a href="#"><svg class="glyph stroked home"><use xlink:href="#stroked-home"></use></svg></a></li>
-            <li><a href="index.php?page_layout=category">Quản lý danh mục</a></li>
-            <li class="active">Thêm danh mục</li>
+            <li><a href="index.php?page_layout=vulgar">Quản lý từ ngữ</a></li>
+            <li class="active">Thêm từ ngữ</li>
         </ol>
     </div>
     <!--/.row-->
 
     <div class="row">
         <div class="col-lg-12">
-            <h1 class="page-header">Thêm danh mục</h1>
+            <h1 class="page-header">Thêm từ ngữ</h1>
         </div>
     </div>
     <!--/.row-->
@@ -44,8 +46,8 @@
                         <?php if(isset($success)){echo $success;} ?>
                         <form role="form" method="post">
                             <div class="form-group">
-                                <label>Tên danh mục:</label>
-                                <input required type="text" name="cat_name" class="form-control" placeholder="Tên danh mục...">
+                                <label>Từ ngữ cần loại bỏ:</label>
+                                <input required type="text" name="vulgar_name" class="form-control" placeholder="Từ ngữ...">
                             </div>
                             <button type="submit" name="sbm" class="btn btn-success">Thêm mới</button>
                             <button type="reset" class="btn btn-default">Làm mới</button>

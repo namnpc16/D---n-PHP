@@ -1,3 +1,4 @@
+
 <?php
 	if (!defined("template")) {
 		die("error");
@@ -92,6 +93,31 @@
                             ?>
                             <tr>
                             <!-- label-danger -->
+                                <!-- //////////////   Modal - delete   //////////////// -->
+                                <div class="modal myModal" tabindex="-1" role="dialog" id="myModal">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title">Thông báo !</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <form action="del_product.php" method="POST">
+                                            <div class="modal-body">
+                                                <input type="hidden" name="delete_id" id="delete_id">
+                                                <p>Bạn có muốn xóa sản phẩm ?</p>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                <button type="submit" name="delete_product" class="btn btn-primary">Delete</button>
+                                            </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                               
+                                <!-- /////////////////////////////////// -->
                                 <td style="text-align: center"><?php echo $row['prd_id']; ?></td>
                                 <td style="text-align: center"><?php echo $row['prd_name']; ?></td>
                                 <td style="text-align: center"><?php echo $row['prd_price']; ?></td>
@@ -102,10 +128,13 @@
                                 <td><?php echo $row['cat_name']; ?></td>
                                 <td class="form-group">
                                     <a href="index.php?page_layout=edit_product&prd_id=<?php echo $row['prd_id'];?>" class="btn btn-primary"><i class="glyphicon glyphicon-pencil"></i></a>
-                                    <a onclick="return thongbao()" href="del_product.php?prd_id=<?php echo $row['prd_id']; ?>" class="btn btn-danger"><i class="glyphicon glyphicon-remove"></i></a>
+                                    <a  class="btn btn-danger deleteProduct" id="deleteProduct"><i class="glyphicon glyphicon-remove"></i></a>
+                                    <!-- href="del_product.php?prd_id=<?php //echo $row['prd_id']; ?>" -->
+                                    <!-- return thongbao() -->
                                 </td>
                                
                             </tr>
+                            
                             <?php
                                 }
                             ?>
@@ -130,7 +159,22 @@
             let conf = confirm("Bạn có chắc chắn muốn xóa ?");
             return  conf;
     }
+
+   
+
 </script>
 <script src="js/jquery-1.11.1.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <script src="js/bootstrap-table.js"></script>
+<script>
+    $(document).ready(function () {
+        $(".deleteProduct").on("click", function () {
+            $("#myModal").modal('show');
+            $tr = $(this).closest('tr');
+            let data = $tr.children("td").map(function () {
+                return $(this).text();
+            }).get();
+            $("#delete_id").val(data[0]);
+        });
+    });
+</script>

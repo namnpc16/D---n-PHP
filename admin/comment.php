@@ -35,9 +35,9 @@
                                 <th>Comment of product</th>
                                 <th>Comment name</th>
                                 <!-- <th>Comm_mail</th> -->
-                                <th>Comm_date</th>
+                                <th>comm_details</th>
                                 <th>Status</th>
-                                <th>Comm_details</th>
+                                <th>Comm_vulgar</th>
                                 <th>Hành động</th>
                             </tr>
                         </thead>
@@ -91,21 +91,46 @@
                                 $query = mysqli_query($conn, $sql);
                                 while ($row = mysqli_fetch_array($query)) {
                             ?>
+                            <!-- //////////////   Modal - delete   //////////////// -->
+                            <div class="modal myModal" tabindex="-1" role="dialog" id="myModal">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title">Thông báo !</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <form action="del_comm.php" method="POST">
+                                            <div class="modal-body">
+                                                <input type="hidden" name="delete_id" id="delete_id">
+                                                <p>Bạn có muốn xóa Comment ?</p>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                <button type="submit" name="" class="btn btn-primary">Delete</button>
+                                            </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                               
+                                <!-- /////////////////////////////////// -->
                             <tr>
                             <!-- label-danger -->
                                 <td style="text-align: center"><?php echo $row['comm_id']; ?></td>
                                 <td style="text-align: center"><?php echo $row['prd_name']; ?></td>
                                 <td style="text-align: center"><?php echo $row['comm_name']; ?></td>
                                 <!-- <td style="text-align: center"></td>  -->
-                                <td style="text-align: center"><?php echo $row["comm_date"] ?></td>
+                                <td style="text-align: center"><?php echo $row["comm_details"] ?></td>
                                 
                                 <td><a style="text-decoration: none"  href="config_status_comm.php?comm_status=<?php echo $row["comm_status"];?>&comm_id=<?php echo $row["comm_id"]; ?>"><span id="comm_status[<?php echo $row["comm_id"]; ?>]" class="label <?php if( $row['comm_status'] == 1 ){ echo "label-success";} else{ echo "label-danger";} ?>">
                                 <?php if( $row['comm_status'] == 1 ){ echo "Hiện";} else{ echo "Ẩn";} ?>
                                 </span></a></td>
-                                <td><?php echo $row['comm_details']; ?></td>
+                                <td><?php echo $row['comm_vulgar']; ?></td>
                                 <td class="form-group">
                                     <a href="index.php?page_layout=edit_comm&comm_id=<?php echo $row['comm_id'];?>" class="btn btn-primary"><i class="glyphicon glyphicon-pencil"></i></a>
-                                    <a onclick="return thongbao()" href="del_comm.php?comm_id=<?php echo $row['comm_id']; ?>" class="btn btn-danger"><i class="glyphicon glyphicon-remove"></i></a>
+                                    <a class="btn btn-danger deleteComment"><i class="glyphicon glyphicon-remove"></i></a>
                                 </td>
                                
                             </tr>
@@ -137,3 +162,15 @@
 <script src="js/jquery-1.11.1.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <script src="js/bootstrap-table.js"></script>
+<script>
+    $(document).ready(function () {
+        $(".deleteComment").on("click", function () {
+            $("#myModal").modal('show');
+            $tr = $(this).closest('tr');
+            let data = $tr.children("td").map(function () {
+                return $(this).text();
+            }).get();
+            $("#delete_id").val(data[0]);
+        });
+    });
+</script>
