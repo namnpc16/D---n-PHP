@@ -47,6 +47,7 @@ if (isset($_SESSION["cart"]) && (count($_SESSION["cart"]) > 0)) {
         <div class="cart-nav-item col-lg-2 col-md-2 col-sm-12">Tùy chọn</div>
         <div class="cart-nav-item col-lg-3 col-md-3 col-sm-12">Giá</div>
     </div>
+
     <form method="post">
         <?php
         $total_price = 0;
@@ -55,6 +56,9 @@ if (isset($_SESSION["cart"]) && (count($_SESSION["cart"]) > 0)) {
             $total_price = $_SESSION["cart"][$row["prd_id"]] * $row["prd_price"];
             $total_price_all += $total_price;
         ?>
+
+        
+
         <div class="cart-item row">
             <div class="cart-thumb col-lg-7 col-md-7 col-sm-12">
                 <img src="admin/img/<?php echo $row["prd_image"]; ?>">
@@ -63,8 +67,38 @@ if (isset($_SESSION["cart"]) && (count($_SESSION["cart"]) > 0)) {
             <div class="cart-quantity col-lg-2 col-md-2 col-sm-12">
                 <input type="number" id="quantity" class="form-control form-blue quantity" name="quantity[<?php echo $row["prd_id"]; ?>]" value="<?php echo $_SESSION["cart"][$row["prd_id"]]; ?>" min="1">
             </div>
-            <div class="cart-price col-lg-3 col-md-3 col-sm-12"><b><?php echo num_for($total_price); ?></b><a onclick="return confirm('Bạn có chắc chắn muốn xóa !')" href="modules/cart/del_cart.php?prd_id=<?php echo $row["prd_id"]; ?>">Xóa</a>
+
+            <div class="cart-price col-lg-3 col-md-3 col-sm-12"><b><?php echo num_for($total_price); ?></b><a style="cursor: pointer;" class="deleteCart">Xóa</a>
+            <!-- onclick="return confirm('Bạn có chắc chắn muốn xóa !')" href="modules/cart/del_cart.php?prd_id=<?php //echo $row["prd_id"]; ?>" -->
             </div>
+
+<!-- //////////////   Modal - delete   //////////////// -->
+        <div class="modal myModal" tabindex="-1" role="dialog" id="myModal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Thông báo !</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form action="" method="POST">
+                    <div class="modal-body">
+                        <input type="hidden" name="delete_id" value="<?php echo $row["prd_id"]; ?>" id="delete_id">
+                        <p>Bạn có muốn xóa sản phẩm ?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" name="delete_product" class="btn btn-primary"> <a style="text-decoration: none; color: white" href="modules/cart/del_cart.php?prd_id=<?php echo $row["prd_id"]; ?>">Delete</a> </button>
+                    </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        
+        <!-- /////////////////////////////////// -->
+
+
         </div>
         <?php
         }  
@@ -201,3 +235,22 @@ if (isset($_SESSION["cart"]) && (count($_SESSION["cart"]) > 0)) {
     </div>
 </div>
 <!--	End Customer Info	-->
+
+<script src="js/jquery-1.11.1.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/bootstrap-table.js"></script>
+<script>
+    $(document).ready(function () {
+        $(".deleteCart").on("click", function () {
+            $("#myModal").modal('show');
+            // $tr = $(this).closest('tr');
+            // let data = $tr.children("td").map(function () {
+            //     return $(this).text();
+            // }).get();
+            // $("#delete_id").val(data[0]);
+        });
+    });
+
+
+ 
+</script>

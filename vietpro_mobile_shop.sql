@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th5 21, 2020 lúc 05:00 PM
+-- Thời gian đã tạo: Th5 26, 2020 lúc 04:14 PM
 -- Phiên bản máy phục vụ: 10.4.10-MariaDB
 -- Phiên bản PHP: 7.2.25
 
@@ -42,7 +42,6 @@ INSERT INTO `category` (`cat_id`, `cat_name`) VALUES
 (3, 'HTC'),
 (10, 'Huawei'),
 (1, 'iPhone'),
-(14, 'LG'),
 (4, 'Nokia'),
 (7, 'OPPO'),
 (13, 'redmi'),
@@ -64,6 +63,7 @@ CREATE TABLE `comment` (
   `comm_mail` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `comm_date` datetime NOT NULL,
   `comm_details` text COLLATE utf8_unicode_ci NOT NULL,
+  `comm_vulgar` text COLLATE utf8_unicode_ci NOT NULL,
   `comm_status` int(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -71,47 +71,49 @@ CREATE TABLE `comment` (
 -- Đang đổ dữ liệu cho bảng `comment`
 --
 
-INSERT INTO `comment` (`comm_id`, `prd_id`, `comm_name`, `comm_mail`, `comm_date`, `comm_details`, `comm_status`) VALUES
-(1, 1, 'Nguyễn Văn A', 'nguyenvana@gmail.com', '2018-12-12 20:59:56', 'Đây thực sự là một sản phẩm tuyệt vời', 0),
-(2, 2, 'Nguyễn Văn A', 'nguyenvana@gmail.com', '2018-12-12 20:59:56', 'Đây thực sự là một sản phẩm tuyệt vời', 0),
-(3, 3, 'Nguyễn Văn A', 'nguyenvana@gmail.com', '2018-12-12 20:59:56', 'Đây thực sự là một sản phẩm tuyệt vời', 0),
-(4, 4, 'Nguyễn Văn A', 'nguyenvana@gmail.com', '2018-12-12 20:59:56', 'Đây thực sự là một sản phẩm tuyệt vời', 0),
-(5, 5, 'Nguyễn Văn A', 'nguyenvana@gmail.com', '2018-12-12 20:59:56', 'Đây thực sự là một sản phẩm tuyệt vời', 0),
-(6, 6, 'Nguyễn Văn A', 'nguyenvana@gmail.com', '2018-12-12 20:59:56', 'Đây thực sự là một sản phẩm tuyệt vời', 0),
-(7, 7, 'Nguyễn Văn A', 'nguyenvana@gmail.com', '2018-12-12 20:59:56', 'Đây thực sự là một sản phẩm tuyệt vời', 0),
-(8, 8, 'Nguyễn Văn A', 'nguyenvana@gmail.com', '2018-12-12 20:59:56', 'Đây thực sự là một sản phẩm tuyệt vời', 0),
-(9, 9, 'Nguyễn Văn A', 'nguyenvana@gmail.com', '2018-12-12 20:59:56', 'Đây thực sự là một sản phẩm tuyệt vời', 0),
-(10, 10, 'Nguyễn Văn A', 'nguyenvana@gmail.com', '2018-12-12 20:59:56', 'Đây thực sự là một sản phẩm tuyệt vời', 0),
-(11, 11, 'Nguyễn Văn A', 'nguyenvana@gmail.com', '2018-12-12 20:59:56', 'Đây thực sự là một sản phẩm tuyệt vời', 0),
-(12, 12, 'Nguyễn Văn A', 'nguyenvana@gmail.com', '2018-12-12 20:59:56', 'Đây thực sự là một sản phẩm tuyệt vời', 0),
-(13, 13, 'Nguyễn Văn A', 'nguyenvana@gmail.com', '2018-12-12 20:59:56', 'Đây thực sự là một sản phẩm tuyệt vời', 0),
-(14, 14, 'Nguyễn Văn A', 'nguyenvana@gmail.com', '2018-12-12 20:59:56', 'Đây thực sự là một sản phẩm tuyệt vời', 0),
-(15, 15, 'Nguyễn Văn A', 'nguyenvana@gmail.com', '2018-12-12 20:59:56', 'Đây thực sự là một sản phẩm tuyệt vời', 0),
-(16, 16, 'Nguyễn Văn A', 'nguyenvana@gmail.com', '2018-12-12 20:59:56', 'Đây thực sự là một sản phẩm tuyệt vời', 0),
-(17, 17, 'Nguyễn Văn A', 'nguyenvana@gmail.com', '2018-12-12 20:59:56', 'Đây thực sự là một sản phẩm tuyệt vời', 0),
-(18, 18, 'Nguyễn Văn A', 'nguyenvana@gmail.com', '2018-12-12 20:59:56', 'Đây thực sự là một sản phẩm tuyệt vời', 0),
-(19, 19, 'Nguyễn Văn A', 'nguyenvana@gmail.com', '2018-12-12 20:59:56', 'Đây thực sự là một sản phẩm tuyệt vời', 0),
-(20, 20, 'Nguyễn Văn A', 'nguyenvana@gmail.com', '2018-12-12 20:59:56', 'Đây thực sự là một sản phẩm tuyệt vời', 0),
-(21, 21, 'Nguyễn Văn A', 'nguyenvana@gmail.com', '2018-12-12 20:59:56', 'Đây thực sự là một sản phẩm tuyệt vời', 0),
-(22, 22, 'Nguyễn Văn A', 'nguyenvana@gmail.com', '2018-12-12 20:59:56', 'Đây thực sự là một sản phẩm tuyệt vời', 0),
-(23, 23, 'Nguyễn Văn A', 'nguyenvana@gmail.com', '2018-12-12 20:59:56', 'Đây thực sự là một sản phẩm tuyệt vời', 0),
-(24, 24, 'Nguyễn Văn A', 'nguyenvana@gmail.com', '2018-12-12 20:59:56', 'Đây thực sự là một sản phẩm tuyệt vời', 0),
-(25, 25, 'Nguyễn Văn A', 'nguyenvana@gmail.com', '2018-12-12 20:59:56', 'Đây thực sự là một sản phẩm tuyệt vời', 0),
-(26, 26, 'Nguyễn Văn A', 'nguyenvana@gmail.com', '2018-12-12 20:59:56', 'Đây thực sự là một sản phẩm tuyệt vời', 0),
-(27, 27, 'Nguyễn Văn A', 'nguyenvana@gmail.com', '2018-12-12 20:59:56', 'Đây thực sự là một sản phẩm tuyệt vời', 0),
-(28, 28, 'Nguyễn Văn A', 'nguyenvana@gmail.com', '2018-12-12 20:59:56', 'Đây thực sự là một sản phẩm tuyệt vời', 0),
-(29, 29, 'Nguyễn Văn A', 'nguyenvana@gmail.com', '2018-12-12 20:59:56', 'Đây thực sự là một sản phẩm tuyệt vời', 0),
-(30, 30, 'Nguyễn Văn A', 'nguyenvana@gmail.com', '2018-12-12 20:59:56', 'Đây thực sự là một sản phẩm tuyệt vời', 0),
-(31, 21, 'admin', 'admin@gamil.com', '2020-04-01 07:52:38', 'very good', 0),
-(32, 21, 'admin', 'admin@gamil.com', '2020-04-01 07:54:44', 'very good', 0),
-(33, 26, 'admin', 'admin@gamil.com', '2020-04-01 07:55:01', 'fadfadsfa', 0),
-(34, 26, 'admin', 'admin@gamil.com', '2020-04-01 07:55:27', 'fadfadsfa', 0),
-(35, 26, 'admin', 'admin@gamil.com', '2020-04-01 07:55:29', 'fadfadsfa', 0),
-(39, 1, 'admin', 'admin@gmail.com', '2020-05-20 00:00:00', 'dầdsfasfd', 0),
-(40, 1, 'nam', 'nam@gmail.com', '2020-05-20 00:00:00', 'adfad', 0),
-(45, 3, 'admin', 'admin@gamil.com', '2020-05-20 13:42:42', 'abc', 0),
-(46, 3, 'admin', 'admin@gamil.com', '2020-05-20 13:44:26', 'abc 01', 0),
-(47, 12, 'admin', 'admin@gamil.com', '2020-05-20 13:45:34', '<p>abc02</p>\r\n', 1);
+INSERT INTO `comment` (`comm_id`, `prd_id`, `comm_name`, `comm_mail`, `comm_date`, `comm_details`, `comm_vulgar`, `comm_status`) VALUES
+(1, 1, 'Nguyễn Văn A', 'nguyenvana@gmail.com', '2018-12-12 20:59:56', 'Đây thực sự là một sản phẩm tuyệt vời', '', 1),
+(3, 3, 'Nguyễn Văn A', 'nguyenvana@gmail.com', '2018-12-12 20:59:56', 'Đây thực sự là một sản phẩm tuyệt vời', '', 1),
+(4, 4, 'Nguyễn Văn A', 'nguyenvana@gmail.com', '2018-12-12 20:59:56', 'Đây thực sự là một sản phẩm tuyệt vời', '', 1),
+(5, 5, 'Nguyễn Văn A', 'nguyenvana@gmail.com', '2018-12-12 20:59:56', 'Đây thực sự là một sản phẩm tuyệt vời', '', 1),
+(6, 6, 'Nguyễn Văn A', 'nguyenvana@gmail.com', '2018-12-12 20:59:56', 'Đây thực sự là một sản phẩm tuyệt vời', '', 1),
+(7, 7, 'Nguyễn Văn A', 'nguyenvana@gmail.com', '2018-12-12 20:59:56', 'Đây thực sự là một sản phẩm tuyệt vời', '', 1),
+(8, 8, 'Nguyễn Văn A', 'nguyenvana@gmail.com', '2018-12-12 20:59:56', 'Đây thực sự là một sản phẩm tuyệt vời', '', 1),
+(9, 9, 'Nguyễn Văn A', 'nguyenvana@gmail.com', '2018-12-12 20:59:56', 'Đây thực sự là một sản phẩm tuyệt vời', '', 1),
+(10, 10, 'Nguyễn Văn A', 'nguyenvana@gmail.com', '2018-12-12 20:59:56', 'Đây thực sự là một sản phẩm tuyệt vời', '', 1),
+(11, 11, 'Nguyễn Văn A', 'nguyenvana@gmail.com', '2018-12-12 20:59:56', 'Đây thực sự là một sản phẩm tuyệt vời', '', 1),
+(12, 12, 'Nguyễn Văn A', 'nguyenvana@gmail.com', '2018-12-12 20:59:56', 'Đây thực sự là một sản phẩm tuyệt vời', '', 1),
+(13, 13, 'Nguyễn Văn A', 'nguyenvana@gmail.com', '2018-12-12 20:59:56', 'Đây thực sự là một sản phẩm tuyệt vời', '', 1),
+(14, 14, 'Nguyễn Văn A', 'nguyenvana@gmail.com', '2018-12-12 20:59:56', 'Đây thực sự là một sản phẩm tuyệt vời vcl', 'Đây thực sự là một sản phẩm tuyệt vời ***', 1),
+(15, 15, 'Nguyễn Văn A', 'nguyenvana@gmail.com', '2018-12-12 20:59:56', 'Đây thực sự là một sản phẩm tuyệt vời', '', 1),
+(16, 16, 'Nguyễn Văn A', 'nguyenvana@gmail.com', '2018-12-12 20:59:56', 'Đây thực sự là một sản phẩm tuyệt vời', '', 1),
+(17, 17, 'Nguyễn Văn A', 'nguyenvana@gmail.com', '2018-12-12 20:59:56', 'Đây thực sự là một sản phẩm tuyệt vời', '', 1),
+(18, 18, 'Nguyễn Văn A', 'nguyenvana@gmail.com', '2018-12-12 20:59:56', 'Đây thực sự là một sản phẩm tuyệt vời', '', 1),
+(19, 19, 'Nguyễn Văn A', 'nguyenvana@gmail.com', '2018-12-12 20:59:56', 'Đây thực sự là một sản phẩm tuyệt vời', '', 1),
+(20, 20, 'Nguyễn Văn A', 'nguyenvana@gmail.com', '2018-12-12 20:59:56', 'Đây thực sự là một sản phẩm tuyệt vời', 'Đây thực sự là một sản phẩm tuyệt vời', 1),
+(21, 21, 'Nguyễn Văn A', 'nguyenvana@gmail.com', '2018-12-12 20:59:56', 'Đây thực sự là một sản phẩm tuyệt vời', 'Đây thực sự là một sản phẩm tuyệt vời', 1),
+(22, 22, 'Nguyễn Văn A', 'nguyenvana@gmail.com', '2018-12-12 20:59:56', 'Đây thực sự là một sản phẩm tuyệt vời', 'Đây thực sự là một sản phẩm tuyệt vời', 1),
+(23, 23, 'Nguyễn Văn A', 'nguyenvana@gmail.com', '2018-12-12 20:59:56', 'Đây thực sự là một sản phẩm tuyệt vời', 'Đây thực sự là một sản phẩm tuyệt vời', 1),
+(24, 24, 'Nguyễn Văn A', 'nguyenvana@gmail.com', '2018-12-12 20:59:56', 'Đây thực sự là một sản phẩm tuyệt vời', 'Đây thực sự là một sản phẩm tuyệt vời', 1),
+(25, 25, 'Nguyễn Văn A', 'nguyenvana@gmail.com', '2018-12-12 20:59:56', 'Đây thực sự là một sản phẩm tuyệt vời', 'Đây thực sự là một sản phẩm tuyệt vời', 1),
+(26, 26, 'Nguyễn Văn A', 'nguyenvana@gmail.com', '2018-12-12 20:59:56', 'Đây thực sự là một sản phẩm tuyệt vời', 'Đây thực sự là một sản phẩm tuyệt vời', 1),
+(27, 27, 'Nguyễn Văn A', 'nguyenvana@gmail.com', '2018-12-12 20:59:56', 'Đây thực sự là một sản phẩm tuyệt vời', 'Đây thực sự là một sản phẩm tuyệt vời', 1),
+(28, 28, 'Nguyễn Văn A', 'nguyenvana@gmail.com', '2018-12-12 20:59:56', 'Đây thực sự là một sản phẩm tuyệt vời', 'Đây thực sự là một sản phẩm tuyệt vời', 1),
+(29, 29, 'Nguyễn Văn A', 'nguyenvana@gmail.com', '2018-12-12 20:59:56', 'Đây thực sự là một sản phẩm tuyệt vời', 'Đây thực sự là một sản phẩm tuyệt vời', 1),
+(30, 30, 'Nguyễn Văn A', 'nguyenvana@gmail.com', '2018-12-12 20:59:56', 'Đây thực sự là một sản phẩm tuyệt vời', 'Đây thực sự là một sản phẩm tuyệt vời', 1),
+(31, 21, 'admin', 'admin@gamil.com', '2020-04-01 07:52:38', 'very good', 'very good', 1),
+(32, 21, 'admin', 'admin@gamil.com', '2020-04-01 07:54:44', 'very good', 'very good', 1),
+(33, 26, 'admin', 'admin@gamil.com', '2020-04-01 07:55:01', 'fadfadsfa', 'fadfadsfa', 1),
+(34, 26, 'admin', 'admin@gamil.com', '2020-04-01 07:55:27', 'fadfadsfa', 'fadfadsfa', 1),
+(35, 26, 'admin', 'admin@gamil.com', '2020-04-01 07:55:29', 'fadfadsfa', 'fadfadsfa', 1),
+(39, 1, 'admin', 'admin@gmail.com', '2020-05-20 00:00:00', 'dầdsfasfd', 'dầdsfasfd', 1),
+(40, 1, 'nam', 'nam@gmail.com', '2020-05-20 00:00:00', 'adfad', 'adfad', 1),
+(45, 3, 'admin', 'admin@gamil.com', '2020-05-20 13:42:42', 'abc', 'abc', 1),
+(48, 5, 'nam', 'admin@gamil.com', '2020-05-23 17:30:51', 'dkm thang vcl ..........\r\n', '*** thang *** ..........\r\n', 1),
+(49, 1, 'admin', 'admin@gamil.com', '2020-05-23 17:47:10', 'dkm abcccc vcl ......\r\n', '*** abcccc *** ......\r\n', 1),
+(50, 1, 'admin', 'admin@gamil.com', '2020-05-24 08:07:08', 'dkm afadfdfasd vcl fadsfasdfas', '*** afadfdfasd *** fadsfasdfas', 1),
+(53, 1, 'admin', 'admin@gamil.com', '2020-05-24 08:17:54', 'dkm vcl vcl adfadsfadsf vcl vcl', '*** *** *** adfadsfadsf *** ***', 1),
+(54, 5, 'admin', 'admin@gamil.com', '2020-05-24 08:31:10', 'thang dkm dkm vcl ddfadf vcl', 'thang *** *** *** ddfadf ***', 1);
 
 -- --------------------------------------------------------
 
@@ -168,9 +170,7 @@ INSERT INTO `product` (`prd_id`, `cat_id`, `prd_name`, `prd_image`, `prd_price`,
 (27, 9, 'Vivo V9 Gold', 'Vivo-V9-Gold.png', 10000000, '12 Tháng', 'Hộp, sách, sạc, cáp, tai nghe', 'Máy Mới 100%', 'Dán Màn Hình 4D', 1, 0, 'Sản phẩm này chúng tôi đang cập nhật nội dung chi tiết, các bạn có thể qua trực tiếp cửa hàng để xem sản phẩm, vì hàng chúng tôi luôn có sẵn.'),
 (28, 9, 'Vivo Y53C Gold', 'Vivo-Y53C-Gold.png', 10000000, '12 Tháng', 'Hộp, sách, sạc, cáp, tai nghe', 'Máy Mới 100%', 'Dán Màn Hình 4D', 1, 0, 'Sản phẩm này chúng tôi đang cập nhật nội dung chi tiết, các bạn có thể qua trực tiếp cửa hàng để xem sản phẩm, vì hàng chúng tôi luôn có sẵn.'),
 (29, 9, 'Vivo Y69 Gold', 'Vivo-Y69-Gold.png', 10000000, '12 Tháng', 'Hộp, sách, sạc, cáp, tai nghe', 'Máy Mới 100%', 'Dán Màn Hình 4D', 1, 0, 'Sản phẩm này chúng tôi đang cập nhật nội dung chi tiết, các bạn có thể qua trực tiếp cửa hàng để xem sản phẩm, vì hàng chúng tôi luôn có sẵn.'),
-(30, 9, 'Vivo Y81i Red', 'Vivo-Y81i-Red.png', 10000000, '12 Tháng', 'Hộp, sách, sạc, cáp, tai nghe', 'like new 99%', 'Dán Màn Hình 4D', 0, 0, 'Sản phẩm này chúng tôi đang cập nhật nội dung chi tiết, các bạn có thể qua trực tiếp cửa hàng để xem sản phẩm, vì hàng chúng tôi luôn có sẵn.   '),
-(32, 1, 'iphone X', 'iPhone-Xr-2-Sim-256GB-Red.png', 12121212, '1 nam', 'tai nghe', 'new 100%', '5%', 1, 1, '<p>&aacute;dfasdfas</p>\r\n'),
-(33, 1, 'iphone XI', 'iPhone-Xs-256GB-Gold.png', 1312312, '1 nam', 'tai nghe', 'new 100%', '5%', 1, 1, '<p>dfadfads</p>\r\n');
+(30, 9, 'Vivo Y81i Red', 'Vivo-Y81i-Red.png', 10000000, '12 Tháng', 'Hộp, sách, sạc, cáp, tai nghe', 'like new 99%', 'Dán Màn Hình 4D', 0, 0, 'Sản phẩm này chúng tôi đang cập nhật nội dung chi tiết, các bạn có thể qua trực tiếp cửa hàng để xem sản phẩm, vì hàng chúng tôi luôn có sẵn.   ');
 
 -- --------------------------------------------------------
 
@@ -200,6 +200,26 @@ INSERT INTO `user` (`user_id`, `user_full`, `user_mail`, `user_pass`, `user_leve
 (6, 'Nguyễn Van D', 'nguyenvand@gmail.com', '123456', 2, ''),
 (7, 'namphong', 'nam10@gmail.com', '123456', 1, ''),
 (9, 'Phương Nam', 'namnpc16cntt01@gmail.com', '12', 1, '4d4e6e4c1eb6b26cf2d9cfe884f33edb');
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `vulgarwords`
+--
+
+CREATE TABLE `vulgarwords` (
+  `id` int(11) NOT NULL,
+  `vulgar_words` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `vulgar_date` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `vulgarwords`
+--
+
+INSERT INTO `vulgarwords` (`id`, `vulgar_words`, `vulgar_date`) VALUES
+(1, 'dkm', '0000-00-00 00:00:00'),
+(4, 'vcl', '2020-05-23 22:29:01');
 
 --
 -- Chỉ mục cho các bảng đã đổ
@@ -232,6 +252,12 @@ ALTER TABLE `user`
   ADD UNIQUE KEY `user_mail` (`user_mail`);
 
 --
+-- Chỉ mục cho bảng `vulgarwords`
+--
+ALTER TABLE `vulgarwords`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- AUTO_INCREMENT cho các bảng đã đổ
 --
 
@@ -245,19 +271,25 @@ ALTER TABLE `category`
 -- AUTO_INCREMENT cho bảng `comment`
 --
 ALTER TABLE `comment`
-  MODIFY `comm_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
+  MODIFY `comm_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
 
 --
 -- AUTO_INCREMENT cho bảng `product`
 --
 ALTER TABLE `product`
-  MODIFY `prd_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+  MODIFY `prd_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 
 --
 -- AUTO_INCREMENT cho bảng `user`
 --
 ALTER TABLE `user`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- AUTO_INCREMENT cho bảng `vulgarwords`
+--
+ALTER TABLE `vulgarwords`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

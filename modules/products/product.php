@@ -114,7 +114,7 @@
          <div class="col-lg-12 col-md-12 col-sm-12">
              <?php
                
-                $sql_comm = "SELECT * FROM `comment` WHERE prd_id = $prd_id AND comm_status = 1 ORDER BY comm_id ASC ";
+                $sql_comm = "SELECT * FROM `comment` WHERE prd_id = $prd_id AND comm_status = 1 ORDER BY comm_id DESC ";
                 $query_comm = mysqli_query($conn, $sql_comm);
 
                 //// phần xử lý biến đổi từ ngữ thô tục thành dấu *** /// Đang bị sai
@@ -156,7 +156,7 @@
                      <li><?php echo $row_comm['comm_date']; ?></li>
                      <!-- cần loại bỏ từ ngữ thô tục -->
                      <li>
-                         <p><?php echo $row_comm["comm_vulgar"]; ?></p>   
+                         <p><?php if($row_comm["comm_vulgar"] != "" ){ echo $row_comm["comm_vulgar"]; }else{ echo $row_comm["comm_details"]; } ?></p>   
                         
                      </li>
                  </ul>
