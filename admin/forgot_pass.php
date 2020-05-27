@@ -65,7 +65,10 @@
           $mail->Username = 'anhnhatdev2504@gmail.com';                 // SMTP username
           // $mail->Password = 'vietpr0sh0p';                           // SMTP password
           $mail->Password = 'aooetapcleuuisun';                           // SMTP password
-          $mail->SMTPSecure = 'ssl';                            // Enable TLS encryption, 'ssl' also accepted
+          $mail->SMTPSecure = 'ssl';   
+          
+          
+          // Enable TLS encryption, 'ssl' also accepted
           $mail->Port = 465;                                    // TCP port to connect to
       
           //Recipients

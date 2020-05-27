@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th5 26, 2020 lúc 04:14 PM
+-- Thời gian đã tạo: Th5 27, 2020 lúc 04:05 PM
 -- Phiên bản máy phục vụ: 10.4.10-MariaDB
 -- Phiên bản PHP: 7.2.25
 
@@ -113,7 +113,8 @@ INSERT INTO `comment` (`comm_id`, `prd_id`, `comm_name`, `comm_mail`, `comm_date
 (49, 1, 'admin', 'admin@gamil.com', '2020-05-23 17:47:10', 'dkm abcccc vcl ......\r\n', '*** abcccc *** ......\r\n', 1),
 (50, 1, 'admin', 'admin@gamil.com', '2020-05-24 08:07:08', 'dkm afadfdfasd vcl fadsfasdfas', '*** afadfdfasd *** fadsfasdfas', 1),
 (53, 1, 'admin', 'admin@gamil.com', '2020-05-24 08:17:54', 'dkm vcl vcl adfadsfadsf vcl vcl', '*** *** *** adfadsfadsf *** ***', 1),
-(54, 5, 'admin', 'admin@gamil.com', '2020-05-24 08:31:10', 'thang dkm dkm vcl ddfadf vcl', 'thang *** *** *** ddfadf ***', 1);
+(54, 5, 'admin', 'admin@gamil.com', '2020-05-24 08:31:10', 'thang dkm dkm vcl ddfadf vcl', 'thang *** *** *** ddfadf ***', 1),
+(55, 1, 'admin', 'admin@gamil.com', '2020-05-27 03:48:27', 'afdadf dmm dkm vcl adfadsf', 'afdadf *** *** *** adfadsf', 1);
 
 -- --------------------------------------------------------
 
@@ -192,14 +193,10 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`user_id`, `user_full`, `user_mail`, `user_pass`, `user_level`, `token`) VALUES
-(1, 'Vietpro Academy', 'vietpro.edu.vn@gmail.com', '123456', 1, ''),
 (2, 'Administrator', 'admin@gmail.com', '123456', 1, ''),
-(3, 'Nguyễn Van A', 'nguyenvana@gmail.com', '123456', 2, ''),
 (4, 'Nguyễn Van B', 'nguyenvanb@gmail.com', '123456', 2, ''),
 (5, 'Nguyễn Van C', 'nguyenvanc@gmail.com', '123456', 2, 'b46077cbb160ae14158a49e40d70499c'),
-(6, 'Nguyễn Van D', 'nguyenvand@gmail.com', '123456', 2, ''),
-(7, 'namphong', 'nam10@gmail.com', '123456', 1, ''),
-(9, 'Phương Nam', 'namnpc16cntt01@gmail.com', '12', 1, '4d4e6e4c1eb6b26cf2d9cfe884f33edb');
+(9, 'Phương Nam', 'namnpc16cntt01@gmail.com', '123456', 1, '286a27fec8752891819f80c900d7795a');
 
 -- --------------------------------------------------------
 
@@ -219,7 +216,8 @@ CREATE TABLE `vulgarwords` (
 
 INSERT INTO `vulgarwords` (`id`, `vulgar_words`, `vulgar_date`) VALUES
 (1, 'dkm', '0000-00-00 00:00:00'),
-(4, 'vcl', '2020-05-23 22:29:01');
+(4, 'vcl', '2020-05-23 22:29:01'),
+(5, 'dmm', '2020-05-27 08:48:04');
 
 --
 -- Chỉ mục cho các bảng đã đổ
@@ -271,25 +269,25 @@ ALTER TABLE `category`
 -- AUTO_INCREMENT cho bảng `comment`
 --
 ALTER TABLE `comment`
-  MODIFY `comm_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
+  MODIFY `comm_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
 
 --
 -- AUTO_INCREMENT cho bảng `product`
 --
 ALTER TABLE `product`
-  MODIFY `prd_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+  MODIFY `prd_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 
 --
 -- AUTO_INCREMENT cho bảng `user`
 --
 ALTER TABLE `user`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT cho bảng `vulgarwords`
 --
 ALTER TABLE `vulgarwords`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
